@@ -60,7 +60,7 @@ public class DaoEstudiante {
             if (rs.next()){
                 estudiante = new BeanEstudiante();
                 maestro = new BeanDocente();
-                estudiante.setId(rs.getLong("id_Docente"));
+                estudiante.setId(rs.getLong("id_Estudiante"));
                 estudiante.setNombre(rs.getString("nombre"));;
                 estudiante.setApellidoP(rs.getString("apellidoP"));
                 estudiante.setApellidoM(rs.getString("apellidoM"));

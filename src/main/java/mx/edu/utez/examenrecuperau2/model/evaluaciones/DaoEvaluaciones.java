@@ -62,7 +62,7 @@ public class DaoEvaluaciones {
             if (rs.next()){
                 evaluacion = new BeanEvaluacion();
                 estudiante = new BeanEstudiante();
-                evaluacion.setId(rs.getLong("id_Docente"));
+                evaluacion.setId(rs.getLong("id_Evaluacion"));
                 evaluacion.setMateria(rs.getString("materia"));;
                 evaluacion.setCalificacion(rs.getInt("calificacion"));
                 estudiante.setNombre(rs.getString("nombre"));

@@ -1,0 +1,56 @@
+create database recuperau2;
+use recuperau2;
+
+CREATE TABLE docentes(
+	id_Docente INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(30) NOT NULL,
+    apellidoP VARCHAR(30) NOT NULL,
+    apellidoM VARCHAR(30) NOT NULL,
+    fechaNac VARCHAR(30) NOT NULL,
+    curp VARCHAR(30) NOT NULL,
+    num_empleado INT NOT NULL
+);
+DROP TABLE docentes;
+
+CREATE TABLE estudiantes(
+	id_Estudiante INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(30) NOT NULL,
+    apellidoP VARCHAR(30) NOT NULL,
+    apellidoM VARCHAR(30) NOT NULL,
+    curp VARCHAR(30) NOT NULL,
+    matricula VARCHAR(30) NOT NULL,
+    maestro INT NOT NULL,
+    Foreign key(maestro) references docentes(id_Docente)
+);
+DROP TABLE estudiantes;
+
+CREATE TABLE evaluaciones(
+	id_Evaluacion INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    materia VARCHAR(30) NOT NULL,
+    calificacion INT NOT NULL,
+    alumno INT NOT NULL,
+    FOREIGN KEY(alumno) REFERENCES estudiantes(id_Estudiante)
+);
+DROP TABLE evaluaciones;
+
+INSERT INTO docentes(nombre, apellidoP, apellidoM, fechaNac, curp, num_empleado)
+	VALUES("Miguel Angel", "Moreno", "Velazquez", "1994-05-12", "MOVM940512SDFGHJK1", 01);
+
+INSERT INTO estudiantes(nombre, apellidoP, apellidoM, curp, matricula, maestro)
+	VALUES("Edson Miguel", "Peralta", "Valdez", "PEVE030307HMSRLDA0", "20213tn034", 01);
+
+INSERT INTO evaluaciones(materia, calificacion, alumno) VALUES("Aplicaciones Web", 9, 01);
+
+DELETE FROM docentes WHERE id_Docente = 4;
+
+SELECT * FROM docentes;
+SELECT * FROM estudiantes;
+SELECT * FROM evaluaciones;
+
+SELECT evaluaciones.id_Evaluacion, estudiantes.nombre, estudiantes.apellidoP, estudiantes.apellidoM, evaluaciones.materia,
+evaluaciones.calificacion FROM evaluaciones JOIN estudiantes ON evaluaciones.alumno = estudiantes.id_Estudiante WHERE
+estudiantes.id_Estudiante = 1;
+
+SELECT estudiantes.id_Estudiante, estudiantes.nombre, estudiantes.apellidoP, estudiantes.apellidoM, estudiantes.curp,
+estudiantes.matricula, docentes.nombre AS maestro FROM estudiantes JOIN docentes ON estudiantes.maestro = docentes.id_Docente
+WHERE estudiantes.id_Estudiante = 1;
